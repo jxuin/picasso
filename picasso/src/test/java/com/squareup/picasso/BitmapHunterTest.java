@@ -167,9 +167,11 @@ public class BitmapHunterTest {
     Action action1 = mockAction(URI_KEY_1, URI_1, mockImageViewTarget());
     Action action2 = mockAction(URI_KEY_1, URI_1, mockImageViewTarget());
     BitmapHunter hunter = new TestableBitmapHunter(picasso, dispatcher, cache, stats, action1);
-    assertThat(hunter.actions).hasSize(1);
+    assertThat(hunter.actions).isNull();
+    assertThat(hunter.action).isEqualTo(action1);
     hunter.attach(action2);
-    assertThat(hunter.actions).hasSize(2);
+    assertThat(hunter.actions).isNotNull();
+    assertThat(hunter.actions).hasSize(1);
   }
 
   @Test public void detachRequest() throws Exception {
